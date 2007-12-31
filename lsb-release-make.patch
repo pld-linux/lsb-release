@@ -1,0 +1,36 @@
+--- lsb-release-2.0/Makefile	2007-12-31 02:38:21.944268171 +0200
++++ lsb-release-2.0/Makefile	2007-12-31 02:42:22.090040824 +0200
+@@ -13,17 +13,26 @@
+-prefix=/usr/local
++prefix=/usr
+ else
+ prefix=$(INSTALL_ROOT)
+ endif
+-mandir=${prefix}/man
++mandir := $(prefix)/share/man
++bindir := $(prefix)/bin
+ 
+ all: man
+ 
+ man: lsb_release.1.gz
+ 
+-lsb_release.1.gz: lsb_release
+-	@./help2man -N --include ./lsb_release.examples --alt_version_key=program_version ./lsb_release >lsb_release.1
+-	@gzip -9f lsb_release.1
++lsb_release.1.gz: lsb_release.1
++	gzip -9c < $< > $@
++
++lsb_release.1: lsb_release
++	help2man -N --include ./lsb_release.examples --version-option=--program_version ./lsb_release > .lsb_release.1
++	mv .lsb_release.1 $@
+ 
+ install: all
+-	install -D -m 644 lsb_release.1.gz ${mandir}/man1/lsb_release.1.gz
+-	install -D -m 755 lsb_release ${prefix}/bin/lsb_release
++	install -d $(DESTDIR)$(mandir)/man1
++	install -d $(DESTDIR)$(bindir)
++	install -m 644 lsb_release.1 $(DESTDIR)$(mandir)/man1/lsb_release.1
++	install -m 755 lsb_release $(DESTDIR)$(bindir)/lsb_release
++
++clean:
++	rm -f lsb_release.1 lsb_release.1.gz
