@@ -1,5 +1,18 @@
+Summary:	Linux Standard Base tools
+Summary(pl.UTF-8):	Narzędzia LSB (Linux Standard Base)
+Name:		lsb-release
+Version:	3.1
+Release:	0.3
+License:	GPL v2+
+Group:		Base
+#Source0:	http://dl.sourceforge.net/lsb/%{name}-2.0.tar.gz
+Source0:	%{name}-%{version}.tar.bz2
+Patch0:		%{name}-make.patch
+URL:		http://www.linuxbase.org/
+BuildRequires:	help2man
+ExclusiveArch:	%{ix86} ia64 %{x8664} ppc ppc64 s390 s390x
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define lsbver 3.1
 %ifarch %{ix86}
 %define archname ia32
 %endif
@@ -22,31 +35,24 @@
 %define archname amd64
 %endif
 
-Summary:	Linux Standard Base tools
-Name:		lsb-release
-Version:	3.1
-Release:	0.3
-License:	GPL v2+
-#Source0:	http://dl.sourceforge.net/lsb/%{name}-2.0.tar.gz
-Source0:	%{name}-%{version}.tar.bz2
-Patch0:		%{name}-make.patch
-Group:		Base
-URL:		http://www.linuxbase.org/
-BuildRequires:	help2man
-ExclusiveArch:	%{ix86} ia64 %{x8664} ppc ppc64 s390 s390x
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 %description
-LSB version query program
-
-This program forms part of the required functionality of the LSB
-(Linux Standard Base) specification.
+LSB version query program. This program forms part of the required
+functionality of the LSB (Linux Standard Base) specification.
 
 The program queries the installed state of the distribution to display
 certain properties such as the version of the LSB against which the
 distribution claims compliance as well. It can also attempt to display
 the name and release of the distribution along with an identifier of
 who produces the distribution.
+
+%description -l pl.UTF-8
+Program do sprawdzania wersji LSB. Stanowi część wymaganej
+funkcjonalności specyfikacji LSB (Linux Standard Base).
+
+Program sprawdza stan instalacji dystrybucji, wyświetlając określone
+właściwości, takie jak wersja LSB z którą zgodna ma być dystrybucja.
+Może także próbować wyświetlić nazwę i wersję dystrybucji wraz z
+identyfikatorem producenta.
 
 %prep
 %setup -q -n %{name}-2.0
@@ -62,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/lsb-release << 'EOF'
-LSB_VERSION=lsb-%{lsbver}-%{arch_name}:lsb-%{lsbver}-noarch
+LSB_VERSION=lsb-%{version}-%{archname}:lsb-%{version}-noarch
 DISTRIB_ID=PLD
 DISTRIB_RELEASE=3.0
 DISTRIB_CODENAME=Th
