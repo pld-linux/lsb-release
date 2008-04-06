@@ -1,11 +1,8 @@
 --- lsb-release-2.0/Makefile	2007-12-31 02:38:21.944268171 +0200
 +++ lsb-release-2.0/Makefile	2007-12-31 02:42:22.090040824 +0200
-@@ -13,17 +13,26 @@
+@@ -13,14 +13,23 @@
 -prefix=/usr/local
 +prefix=/usr
- else
- prefix=$(INSTALL_ROOT)
- endif
 -mandir=${prefix}/man
 +mandir := $(prefix)/share/man
 +bindir := $(prefix)/bin

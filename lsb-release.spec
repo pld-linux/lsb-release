@@ -2,11 +2,12 @@ Summary:	Linux Standard Base tools
 Summary(pl.UTF-8):	Narzędzia LSB (Linux Standard Base)
 Name:		lsb-release
 Version:	3.1
-Release:	0.3
+Release:	1
 License:	GPL v2+
 Group:		Base
 #Source0:	http://dl.sourceforge.net/lsb/%{name}-2.0.tar.gz
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	%{name}-2.0.tar.bz2
+# Source0-md5:	cf40f5c02016bc61db03591cc3ea1ca2
 Patch0:		%{name}-make.patch
 URL:		http://www.linuxbase.org/
 BuildRequires:	help2man
@@ -72,8 +73,12 @@ LSB_VERSION=lsb-%{version}-%{archname}:lsb-%{version}-noarch
 DISTRIB_ID=PLD
 DISTRIB_RELEASE=3.0
 DISTRIB_CODENAME=Th
-DISTRIB_DESCRIPTION="PLD"
+DISTRIB_DESCRIPTION="PLD Linux"
 EOF
+touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/core-%{version}-%{archname}
+touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/core-%{version}-noarch
+touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/graphics-%{version}-%{archname}
+touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/graphics-%{version}-noarch
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,5 +87,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lsb_release
 %{_sysconfdir}/lsb-release
-%dir %{_sysconfdir}/%{name}.d
+%{_sysconfdir}/%{name}.d
 %{_mandir}/man1/lsb_release.1*
