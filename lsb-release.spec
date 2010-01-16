@@ -11,6 +11,8 @@ Source0:	%{name}-2.0.tar.bz2
 Patch0:		%{name}-make.patch
 URL:		http://www.linuxbase.org/
 BuildRequires:	help2man
+BuildRequires:	util-linux
+Requires:	util-linux
 ExclusiveArch:	%{ix86} ia64 %{x8664} ppc ppc64 s390 s390x
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
