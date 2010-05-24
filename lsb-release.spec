@@ -2,7 +2,7 @@ Summary:	Linux Standard Base tools
 Summary(pl.UTF-8):	Narzędzia LSB (Linux Standard Base)
 Name:		lsb-release
 Version:	3.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Base
 #Source0:	http://dl.sourceforge.net/lsb/%{name}-2.0.tar.gz
