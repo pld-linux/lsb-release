@@ -11,6 +11,7 @@ Source0:	%{name}-2.0.tar.bz2
 Patch0:		%{name}-make.patch
 URL:		http://www.linuxbase.org/
 BuildRequires:	help2man
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	util-linux
 Requires:	util-linux
 ExclusiveArch:	%{ix86} ia64 %{x8664} ppc ppc64 s390 s390x
@@ -73,10 +74,19 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/lsb-release << 'EOF'
 LSB_VERSION=lsb-%{version}-%{archname}:lsb-%{version}-noarch
 DISTRIB_ID=PLD
+DISTRIB_DESCRIPTION="PLD Linux"
+%if "%{pld_release}" == "ac"
+DISTRIB_RELEASE=2.0
+DISTRIB_CODENAME=Ac
+%endif
+%if "%{pld_release}" == "th"
 DISTRIB_RELEASE=3.0
 DISTRIB_CODENAME=Th
-DISTRIB_DESCRIPTION="PLD Linux"
+%endif
 EOF
+%if "%{pld_release}" == "ti"
+exit 1
+%endif
 touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/core-%{version}-%{archname}
 touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/core-%{version}-noarch
 touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/graphics-%{version}-%{archname}
