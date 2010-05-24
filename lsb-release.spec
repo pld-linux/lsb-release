@@ -17,6 +17,9 @@ Requires:	util-linux
 ExclusiveArch:	%{ix86} ia64 %{x8664} ppc ppc64 s390 s390x
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# no payload
+%define		_enable_debug_packages	0
+
 %ifarch %{ix86}
 %define archname ia32
 %endif
