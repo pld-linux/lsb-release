@@ -2,6 +2,11 @@
 # Define this to link to which library version  eg. /lib64/ld-lsb-x86-64.so.3
 %define lsbsover 3
 
+%ifarch aarch64
+%global archname aarch64
+%global ldso ld-linux-aarch64.so.1
+%global lsbldso ld-lsb-aarch64.so
+%endif
 %ifarch %{ix86}
 %define archname ia32
 %define ldso ld-linux.so.2
@@ -44,7 +49,7 @@
 %define lsbldso ld-lsb-x32.so
 %endif
 
-%ifarch ia64 ppc64 s390x x86_64
+%ifarch ia64 ppc64 s390x x86_64 aarch64
 %define qual ()(64bit)
 %else
 %ifarch x32
@@ -72,7 +77,7 @@ BuildRequires:	util-linux
 Requires:	coreutils
 Requires:	glibc
 Requires:	util-linux
-ExclusiveArch:	%{ix86} ia64 %{x8664} x32 ppc ppc64 s390 s390x
+ExclusiveArch:	%{ix86} ia64 %{x8664} x32 ppc ppc64 s390 s390x aarch64
 # dependency for primary LSB application for v1.3
 Provides:	lsb = %{version}
 # dependency for primary LSB application for v2.0 and v3.0
